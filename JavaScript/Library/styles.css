@@ -1,0 +1,30 @@
+.parentcontainer{
+    display: flex;
+    width: 100%;
+}
+
+.childcontainercontent{
+    display: flex;
+    border-radius: 20px;
+    column-gap: 5px;
+    width: 100%;
+}
+.libraryBookInfo{
+    display: flex;
+    flex-direction: column;
+    background-color: beige; 
+    margin-top: 10px;  
+    flex:1;
+}
+.libraryBookInfo .cardHeader {
+    width: 100%;
+    display: flex;
+    padding: 1%;
+    justify-content: space-around;
+}
+.libraryBookInfo .cardHeader button {
+    padding: 10px;
+}
+.libraryBookInfo > * {
+    align-self: center;
+}
