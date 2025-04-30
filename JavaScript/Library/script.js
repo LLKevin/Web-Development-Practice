@@ -23,20 +23,21 @@ function addBookToLibrary(title, author, pageNumbers, haveRead){
     myLibrary.push(newBook);
 }
 
+//Default Elements
 (function populateBook(){
     addBookToLibrary("The Hobbit", "J.R.R Tolkien", 285, false);
     addBookToLibrary("Cell", "Stephen King", 449, true);
     addBookToLibrary("Twilight", "Stephanie Meyer", 350, false);
     addBookToLibrary("Twilight", "Stephanie Meyer", 350, false);
-
 })();
 
-function displayBooks(){
+function displayBooks(startingIndex=0){
+
+    //Remove all Books or Check which books need to be added.
     const bookListDomEle = document.getElementsByClassName("childcontainercontent")
-    myLibrary.forEach(element => {
+    for(let i=startingIndex; i < myLibrary.length; i++){
         let libraryInfo = document.createElement("div");
         libraryInfo.className = "libraryBookInfo";
-        // The event listener going to the parent event and filtered after.
         libraryInfo.addEventListener("click", (e) =>{
             let targetElementAttribute = e.target.parentNode.parentElement.dataset.attribute;
             if(e.target.className === "InfoDelete"){
@@ -50,21 +51,18 @@ function displayBooks(){
 
                 //The default value will be fault if the page is refreshed.
                 myLibrary.find(item => item.id === targetElementAttribute).haveRead = newStatusBool;
-                console.log(myLibrary)
-
-
                 e.target.parentElement.parentElement.childNodes.forEach((x) =>{
                     if(x.className === "haveRead"){
                         x.textContent = newStatusBool;
                     }
                 });
             }
-        });
+        })
 
-        libraryInfo.setAttribute(`data-attribute`, element.id);
-        libraryInfo.innerHTML = `${createButtons().outerHTML} <p class='title'>${element.title}</p><p class='author'>${element.author}</p><p class='pageNumbers'>${element.pageNumbers}</p><p class='haveRead'>${element.haveRead}</p>`
+        libraryInfo.setAttribute(`data-attribute`, myLibrary[i].id);
+        libraryInfo.innerHTML = `${createButtons().outerHTML} <p class='title'>${myLibrary[i].title}</p><p class='author'>${myLibrary[i].author}</p><p class='pageNumbers'>${myLibrary[i].pageNumbers}</p><p class='haveRead'>${myLibrary[i].haveRead}</p>`
         bookListDomEle.item(0).appendChild(libraryInfo);
-    });
+    }
 }
 
 function createButtons(){
@@ -84,5 +82,19 @@ function createButtons(){
     headerContainer.appendChild(libraryInfoDelete);
     return headerContainer;
 }
+
+function submitForm(event){
+    event.preventDefault();
+    let formElements =  event.target.elements;
+    let title  = formElements[0].value;
+    let author = formElements[1].value;
+    let numOfPages=formElements[2].value;
+    let isRead = formElements[3].checked;
+    addBookToLibrary(title, author, numOfPages, isRead);
+    displayBooks(myLibrary.length - 1);
+    bookForm[0].reset()    
+    dialog.close();
+}
+
 
 displayBooks();
