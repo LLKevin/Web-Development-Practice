@@ -1,0 +1,18 @@
+.board{
+    display: flex;
+    height: auto;
+    width: 100%;
+}
+
+.buttonDiv{
+    display: flex;
+    height: auto;
+    flex: 1 1 33%;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.buttonDiv button {
+    width: 33%;
+    height: 50px;
+}
