@@ -95,4 +95,3 @@ const calculator = (function () {
     // contains module dependencies required to function; A mock object can be used for testing purposes. 
     // Modules should be treated as closed entities. Example, document is only available when the dom is accessible, so an error would occur.
   })(document || documentMock);
-  
