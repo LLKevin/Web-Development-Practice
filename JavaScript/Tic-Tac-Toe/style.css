@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 .board{
     display: flex;
     height: auto;
@@ -15,4 +19,25 @@
 .buttonDiv button {
     width: 33%;
     height: 50px;
+}
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    column-gap: 10px;
+}
+.buttonContainer button {
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.message {
+    border: 1px solid black;
+    height: auto;
+    padding: 10px;
+    margin-top: 10px;
+    min-height: 50px;
+    text-align: center;
+    width: 100%;
 }
