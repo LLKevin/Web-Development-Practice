@@ -19,6 +19,7 @@ const GameBoard = (function(){
     const resetGameboard = () =>{
         gameboard = [];
         populateGameboard();
+        UiContoller.displayMessage = "";
     }
 
     function Cell(){
