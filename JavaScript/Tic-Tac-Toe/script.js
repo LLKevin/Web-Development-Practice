@@ -69,8 +69,6 @@ const GameController = (function(playerOneName="Player One", playerTwoName="Play
         activePlayer = activePlayer === players[0] ? players[1]: players[0];
     }
 
-    //const getActivePlayer = () => activePlayer;
-
     resetBtn[0].addEventListener('click', () => {
         for(let i = 0; i < board.length; i++){
             for(let k = 0; k < board.length; k++){
@@ -84,34 +82,48 @@ const GameController = (function(playerOneName="Player One", playerTwoName="Play
             }
         }
     })
-    //const checkWinCondition = () =>{};
 
     function playRound(){
         let selectCell = {};
         // Will mark the cell() and check if a cell can be marked.
         const boardDivRef = document.getElementsByClassName("board");
-        const checkWinConditon = () =>{
+        const checkWinConditon = () => {
             console.log("WIN CHECk")
-            // hor , vert, diag
+            let diagonalArr = [];
+            let reverseDiagonalArr = [];
+            // Row
             for(let i=0; i < board.length; i++){
-
                 if(board[i].every(cell => cell.getValue() !== "" 
                 && cell.getValue() === board[i][0].getValue())){
-                    console.log('WINNER! ROW')
+                    UiContoller.displayMessage(`${board[i][0].getValue() === 1 ? "X":"O"} is the Winner!`);
                 }
             }
+            // Diagonal
+            for(let i = 0; i < board.length; i++){
+                diagonalArr.push(board[i][i].getValue());
+                reverseDiagonalArr.push(board[i][board.length - 1 - i].getValue());
+            }
 
+            if(diagonalArr.every(item => item === diagonalArr[0]) && 
+            diagonalArr[diagonalArr.length - 1] !== ""){
+                UiContoller.displayMessage(`${diagonalArr[0] === 1 ? "X":"O"} is the Winner!`);
+            }
+            if(reverseDiagonalArr.every(item => item === reverseDiagonalArr[0]) 
+                && reverseDiagonalArr[diagonalArr.length - 1] !== ""){
+                    UiContoller.displayMessage(`${reverseDiagonalArr[0] === 1 ? "X":"O"} is the Winner!`);
+            }
+    
+            // Column
             for(let j=0; j < board.length; j++){
                 if(board.every(row => row[j].getValue() !== "" 
-                && board[0][j].getValue())){
-                    console.log("WINNER! Column")
+                && row[j].getValue() === board[0][j].getValue())){
+                    UiContoller.displayMessage(`${board[0][j].getValue() === 1 ? "X":"O"} is the Winner!`);
                 }
             }
         };
 
         // complete the clicking; 
         boardDivRef[0].addEventListener("click", (event) =>{
-
             for(i=0; i< board.length; i++){
                 for(k=0; k<board.length; k++){
                     if(board[i][k].getId() === event.target.getAttribute('data-attribute')){
