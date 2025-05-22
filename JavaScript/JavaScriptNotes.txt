@@ -68,3 +68,83 @@ player2.getMarker(); // My marker is 'O'
 
 
 
+/------------------------Classes---------------------------------/
+classes are 'special functions' 
+defined
+
+class Rectangle {
+  Constructor(height, width){
+    this.height = height;
+    this.width = width;
+  }
+  sayWidth(){
+    alert(this.width);
+  }
+}
+
+let shape = new Rectangle(4,5);
+shape.sayWidth();
+
+Rectangle --> Rectangle.prototype.constructor: Constructor: Rectangle; sayWidth(): function
+
+differences:
+1. function created by the class label flips the [[isclassconstructor]]: true;
+Classes require the use of the 'new' keyword.
+
+
+example: 
+class User {
+  constructor() {}
+}
+
+alert(typeof User); // function
+User(); // Error: Class constructor User cannot be invoked without 'new'
+
+2. Class methods are non-enumerable. You will not be able to iterate through the methods (example: for .. in)
+3. Class always 'use strict' 
+
+can include getters/setters
+
+
+example:
+
+
+ class ClockT {
+
+    constructor({template}){
+      ***** you don't need to make a variable to store the template data ******
+      this.template = template;
+    }
+
+    render() {
+      let date = new Date();
+  
+      let hours = date.getHours();
+      if (hours < 10) hours = '0' + hours;
+  
+      let mins = date.getMinutes();
+      if (mins < 10) mins = '0' + mins;
+  
+      let secs = date.getSeconds();
+      if (secs < 10) secs = '0' + secs;
+  
+      let output = this.template
+        .replace('h', hours)
+        .replace('m', mins)
+        .replace('s', secs);
+  
+      console.log(output);
+    };
+
+    stop(){
+      clearInterval(this.timer);
+    };
+  
+    start(){
+      this.render();
+      this.timer = setInterval(() => this.render(), 1000);
+    };
+  }
+
+  let clockT = new ClockT({template:'h:m:s'});
+  clockT.start();
