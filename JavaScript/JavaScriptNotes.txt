@@ -148,3 +148,15 @@ example:
 
   let clockT = new ClockT({template:'h:m:s'});
   clockT.start();
+
+
+/// ----- Extends ------
+creates the class that is a child of another class.
+example: class dateformatter extends Date {
+  getFormattedDate(){
+    const months = ["Jan", "Feb" ......];
+    return `${this.getDate()}-${months[this.getMonths()] - ${this.getFullYear()}}`
+  }
+}
+
+console.log(new DateFormatter("August 19, 1975 23:15:30").getFormattedDate());
