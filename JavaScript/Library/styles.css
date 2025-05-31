@@ -51,3 +51,19 @@ dialog{
 .libraryBookInfo > * {
     align-self: center;
 }
+
+.dialogClose{
+    border-radius: 50%;
+    padding: 1em;
+    align-content: center;
+    background: #eeeeb0;
+    color: #ae1414;
+    font-size: 12px;
+    font-weight: 900;
+    align-self: end;
+}
+
+.wrapper{
+    display: flex;
+    flex-direction: column;
+}
